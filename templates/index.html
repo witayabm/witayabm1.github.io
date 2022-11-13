@@ -1,0 +1,38 @@
+
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% include "layout.html" %}
+
+{% block title %}
+   ยินดีต้อนรับ
+{% endblock %}
+
+{% block content %}
+
+
+<div class = "container my-2">
+
+    {% for message in get_flashed_messages() %}
+
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{message}}</strong>
+      </div>
+    {% endfor %}
+
+    {{wtf.quick_form(form)}}
+    <hr>
+    {% if session['name'] %}
+        ชื่อของคุณ คือ <strong>{{session['name']}}</strong><br>
+        ยอมรับริการหรือไม่ ? <strong>{{session['isAccept']}}</strong><br>
+        เพศ ? <strong>{{session['gender'] }}</strong><br>
+        ความสามารถพิเศษ ? <strong>{{session['skill'] }}</strong><br>
+
+    {% else %}
+        ไม่พบข้อมูล
+
+    {% endif%}
+
+</div>
+
+{% endblock %}
